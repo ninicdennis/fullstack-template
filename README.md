@@ -1,19 +1,26 @@
-# Next.js FE Template
+# Dockerized Full Stack Template
 
-This is a work in progress template used by me! This includes my custom linter and prettier configs that I use on other various project. I made this a public template so that anyone can use this!
+This is a work in progress template used by me! This includes my [Next.js Frontend Template](https://github.com/ninicdennis/next-template) but in a more portable dockerized form. I have also included a basic install of postgresql 16. This project also uses prisma, which should handle all of the migrations for you as well as include prisma studio. More to come!
 
 ## Features
 
--  **Next.js** - Template is based off the latest version of Next.js, with minor optimizations applied!
--  **Typescript** - Written in Typescript to give static typing for added security!
--  **Daisyui** - A component based library based off of tailwindcss!
--  **Tailwindcss** - A very powerful utility-first framework with a very robust class based structure!
+-  **Next.js** - My frontend of choice, includes my linters, TS, DaisyUI and Tailwindcss!
+-  **Postgresql** - The database of choice, no optimizations as of now just pure postgresql.
+-  **Prisma** - Migration handling, schema builder, all kinds of fun!
 
 ## Getting Started
 
-1. Install dependencies using `yarn install`
-2. Start the dev server using `yarn  dev`
+Create a `.env` as follows (note, all these fields are required do not leave them blank!)
 
-## Daisyui theme
+```
+POSTGRES_DB=mydatabase
+POSTGRES_USER=myuser
+POSTGRES_PASSWORD=mypassword
+POSTGRES_HOST_AUTH_METHOD=trust
 
-You can find how to add and try a few themes [here!](https://daisyui.com/docs/themes/)
+DATABASE_URL=postgres://myuser:mypassword@localhost:5432/mydatabase
+```
+
+Install packages with `yarn install`.
+
+You can then run `docker-compose up` to build and run the application. The frontend is on port `3000` and the database will be on port `5432`. To run prisma studio, you can run `yarn prisma:studio`

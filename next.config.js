@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-}
+	reactStrictMode: true,
+	exclude: './prisma/*',
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
