@@ -1,14 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { IoMdClose } from 'react-icons/io';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const Drawer = ({ mainContent }: { mainContent: JSX.Element | JSX.Element[] }) => {
 	const router = useRouter();
+	const { data: session } = useSession();
 
-	const NAVIGATION: { title: string; href: string }[] = [
-		{ title: 'Login', href: '/auth/login' },
-		{ title: 'Register', href: '/auth/register' },
-	];
+	const NAVIGATION: { title: string; href: string; reqAuth: false }[] = [];
 
 	return (
 		<div className='drawer '>
@@ -25,17 +24,43 @@ const Drawer = ({ mainContent }: { mainContent: JSX.Element | JSX.Element[] }) =
 						</label>
 					</div>
 					<div className='divider m-0' />
-					{NAVIGATION.map(({ title, href }) => (
-						<Link
-							className={`btn w-full btn-${
-								router.pathname === href ? 'secondary' : 'ghost'
-							} text-left capitalize self-baseline`}
-							key={title}
-							href={href}
-						>
-							{title}
-						</Link>
+					{NAVIGATION.map(({ title, href, reqAuth }) => (
+						<>
+							{reqAuth && !session?.user ? null : (
+								<Link
+									className={`btn w-full btn-${
+										router.pathname === href ? 'secondary' : 'ghost'
+									} text-left capitalize self-baseline`}
+									key={title}
+									href={href}
+								>
+									{title}
+								</Link>
+							)}
+						</>
 					))}
+					{session?.user ? (
+						<>
+							<p className='text-sky-600'> {session.user.name}</p>
+							<button
+								className={`btn w-full btn-${
+									router.pathname === '/auth/logout' ? 'secondary' : 'ghost'
+								} text-left capitalize self-baseline`}
+								onClick={() => signOut()}
+							>
+								Sign Out
+							</button>
+						</>
+					) : (
+						<button
+							className={`btn w-full btn-${
+								router.pathname === '/auth/login' ? 'secondary' : 'ghost'
+							} text-left capitalize self-baseline`}
+							onClick={() => signIn()}
+						>
+							Sign In
+						</button>
+					)}
 				</ul>
 			</div>
 		</div>

@@ -8,14 +8,14 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./.env
+      - ./.env.local
     command: yarn run dev
   postgres:
     image: postgres
     container_name: postgres_db
     restart: always
     env_file:
-      - ./.env
+      - ./.env.local
     ports:
       - "5432:5432"
     volumes:

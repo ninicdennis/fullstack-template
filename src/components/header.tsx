@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { IoMdMenu } from 'react-icons/io';
 import Link from 'next/link';
-
 const Header = () => {
 	const [check, setCheck] = useState(false);
 
