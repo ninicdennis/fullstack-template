@@ -22,7 +22,8 @@
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "off",
 		"quotes": [2, "single", { "avoidEscape": true }],
-		"@typescript-eslint/ban-ts-comment": "off"
+		"@typescript-eslint/ban-ts-comment": "off",
+		"react/no-unknown-property": [2, { "ignore": ["jsx", "global"] }]
 	},
 	"parserOptions": {
 		"ecmaVersion": 6,
